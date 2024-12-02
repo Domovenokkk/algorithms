@@ -1,0 +1,5 @@
+﻿  mainex.cpp
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(15,48): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(32,29): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(58,52): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  exp.vcxproj -> C:\Users\Max\Desktop\aicd\algorithms\x64\Debug\exp.exe

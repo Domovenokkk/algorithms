@@ -1,0 +1,1 @@
+Alphabet Size: 26, Text Length: 1000, Pattern Length: 10, Trivial Time: 558 us, KMP Time: 47 us

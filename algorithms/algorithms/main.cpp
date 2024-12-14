@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <chrono>
-#include "vector.h"
 
 using namespace std;
 using namespace chrono;
 
-TVector<int> rabinKarp(const string& text, const string& pattern) {
-    TVector<int> positions;
+// Function to perform the Rabin-Karp search algorithm
+vector<int> rabinKarp(const string& text, const string& pattern) {
+    vector<int> positions;
     int m = pattern.size();
     int n = text.size();
     int base = 256;
@@ -26,7 +27,14 @@ TVector<int> rabinKarp(const string& text, const string& pattern) {
 
     for (int i = 0; i <= n - m; i++) {
         if (patternHash == textHash) {
-            if (text.substr(i, m) == pattern) {
+            bool match = true;
+            for (int j = 0; j < m; j++) {
+                if (text[i + j] != pattern[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
                 positions.push_back(i);
             }
         }
@@ -40,51 +48,50 @@ TVector<int> rabinKarp(const string& text, const string& pattern) {
     return positions;
 }
 
-TVector<int> knuthMorrisPratt(const string& text, const string& pattern) {
-    TVector<int> positions;
-    int m = pattern.size();
-    int n = text.size();
-    TVector<int> lps(m, 0);
+// Function to build the prefix table (fY) for the Knuth-Morris-Pratt algorithm
+void buildPrefixTable(const string& pattern, vector<int>& fY) {
+    int n = pattern.size();
+    fY[0] = 0;
+    int j = 0;
 
-    int len = 0;
-    int i = 1;
-    while (i < m) {
-        if (pattern[i] == pattern[len]) {
-            len++;
-            lps[i] = len;
-            i++;
+    for (int i = 1; i < n; i++) {
+        while (j > 0 && pattern[i] != pattern[j]) {
+            j = fY[j - 1];
         }
-        else {
-            if (len != 0) {
-                len = lps[len - 1];
-            }
-            else {
-                lps[i] = 0;
-                i++;
-            }
+        if (pattern[i] == pattern[j]) {
+            j++;
         }
+        fY[i] = j;
+    }
+}
+
+// Knuth-Morris-Pratt search algorithm
+vector<int> knuthMorrisPratt(const string& text, const string& pattern) {
+    vector<int> positions;
+    int n = text.size();
+    int m = pattern.size();
+
+    if (m == 0 || n == 0 || m > n) {
+        return positions; // No valid search possible
     }
 
-    i = 0;
+    vector<int> fY(m, 0);
+    buildPrefixTable(pattern, fY);
+
     int j = 0;
-    while (i < n) {
-        if (pattern[j] == text[i]) {
-            i++;
+    for (int i = 0; i < n; i++) {
+        while (j > 0 && text[i] != pattern[j]) {
+            j = fY[j - 1];
+        }
+        if (text[i] == pattern[j]) {
             j++;
         }
         if (j == m) {
-            positions.push_back(i - j);
-            j = lps[j - 1];
-        }
-        else if (i < n && pattern[j] != text[i]) {
-            if (j != 0) {
-                j = lps[j - 1];
-            }
-            else {
-                i++;
-            }
+            positions.push_back(i - m + 1); // Pattern found
+            j = fY[j - 1];
         }
     }
+
     return positions;
 }
 
@@ -97,7 +104,7 @@ void writeResults(const string& algorithmName, const string& text, const string&
         return;
     }
 
-    TVector<int> positions;
+    vector<int> positions;
     auto start = high_resolution_clock::now();
 
     if (algorithmName == "Rabin-Karp") {
@@ -116,7 +123,7 @@ void writeResults(const string& algorithmName, const string& text, const string&
     auto end = high_resolution_clock::now();
     double duration = duration_cast<microseconds>(end - start).count() / 1e6;
 
-    if (positions.size() == 0) {
+    if (positions.empty()) {
         outputFile << "No match found." << endl;
     }
     else {

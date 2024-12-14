@@ -1,0 +1,2 @@
+k/T1 (Trivial Algorithm)	T2 (KMP Algorithm)
+1	4.3e-06	4.1e-06

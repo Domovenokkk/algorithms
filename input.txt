@@ -1,2 +1,2 @@
-ababcabcabababd
-ababd
+This is a simple example where the word simple appears multiple times in the text. The simple solution is to use simple algorithms. Let's see how simple this really is.
+simple

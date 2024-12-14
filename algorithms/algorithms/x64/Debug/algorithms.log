@@ -1,6 +1,7 @@
 ﻿  main.cpp
-C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(12,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(13,24): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(45,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(46,24): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(13,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(14,24): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(53,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(71,24): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\algorithms\main.cpp(72,27): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   algorithms.vcxproj -> C:\Users\Max\Desktop\aicd\algorithms\x64\Debug\algorithms.exe

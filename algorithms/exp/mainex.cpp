@@ -8,6 +8,7 @@
 // Функция для генерации случайной строки
 std::string generate_random_string(size_t length, const std::string& alphabet) {
     std::string result;
+    result.reserve(length); // Резервируем память для строки
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, alphabet.size() - 1);
@@ -22,6 +23,7 @@ std::string generate_random_string(size_t length, const std::string& alphabet) {
 // Функция для генерации строки по шаблону
 std::string generate_pattern_string(const std::string& base, size_t k) {
     std::string result;
+    result.reserve(base.size() * k); // Резервируем память
     for (size_t i = 0; i < k; ++i) {
         result += base;
     }
@@ -93,12 +95,18 @@ void SFT_KMP(const std::string& X, size_t m, const std::string& Y, size_t n, std
 // Функция для замера времени работы алгоритма
 template<typename Func>
 double measure_time(Func func, const std::string& X, const std::string& Y) {
-    std::vector<int> f;  // Вектор для хранения результатов
-    auto start = std::chrono::high_resolution_clock::now();
-    func(X, X.size(), Y, Y.size(), f);  // Передаем вектор по ссылке
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> duration = end - start;
-    return duration.count();
+    std::vector<int> f;  // Вектор для хранения результатов (например, функции префиксов)
+    const size_t iterations = 1; // Количество повторений для усреднения
+    double total_duration = 0;
+
+    for (size_t i = 0; i < iterations; ++i) {
+        auto start = std::chrono::high_resolution_clock::now();
+        func(X, X.size(), Y, Y.size(), f); // Вызов алгоритма поиска
+        auto end = std::chrono::high_resolution_clock::now();
+        total_duration += std::chrono::duration<double>(end - start).count();
+    }
+
+    return total_duration / iterations; // Усреднённое время выполнения
 }
 
 // Функция для записи строк в файл

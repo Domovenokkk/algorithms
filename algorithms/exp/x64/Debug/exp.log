@@ -1,15 +1,15 @@
 ﻿  mainex.cpp
-C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(13,64): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(14,64): warning C4267: аргумент: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(42,21): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(44,21): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(86,37): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\Max\Desktop\aicd\algorithms\exp\mainex.cpp(88,37): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int

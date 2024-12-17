@@ -7,18 +7,20 @@ def read_data_from_txt(file_path):
     """
     Чтение данных из txt-файла и возврат словаря с k, T1 и T2.
     """
-    data = {'k': [], 'T1': [], 'T2': []}
+    data = {'k': [], 'T1': [], 'T2': [], 'T3': []}
     with open(file_path, 'r') as file:
         lines = file.readlines()
         for line in lines[1:]:  # Пропускаем заголовок
             parts = line.split()
-            if len(parts) == 3:
+            if len(parts) == 4:
                 k = int(parts[0])
                 T1 = float(parts[1])
                 T2 = float(parts[2])
+                T3 = float(parts[3])
                 data['k'].append(k)
                 data['T1'].append(T1)
                 data['T2'].append(T2)
+                data['T3'].append(T3)
     return data
 
 def write_to_excel(data, output_file):
@@ -30,11 +32,11 @@ def write_to_excel(data, output_file):
     sheet.title = "Algorithm Times"
 
     # Заголовки
-    sheet.append(["k", "T1 (Trivial Algorithm)", "T2 (KMP Algorithm)"])
+    sheet.append(["k", "T1 (Trivial Algorithm)", "T2 (KMP Algorithm)", "T3 (RabinKarp Algorithm)"])
 
     # Заполнение данных
     for i in range(len(data['k'])):
-        sheet.append([data['k'][i], data['T1'][i], data['T2'][i]])
+        sheet.append([data['k'][i], data['T1'][i], data['T2'][i], data['T3'][i]])
 
     workbook.save(output_file)
     print(f"Данные сохранены в файл {output_file}")
@@ -48,9 +50,10 @@ def plot_graphs_combined(data, file_name):
     # Построение графиков
     plt.plot(data['k'], data['T1'], marker='o', linestyle='-', color='b', label='T1 (Trivial Algorithm)')
     plt.plot(data['k'], data['T2'], marker='o', linestyle='-', color='r', label='T2 (KMP Algorithm)')
+    plt.plot(data['k'], data['T3'], marker='o', linestyle='-', color='g', label='T3 (RabinKarp Algorithm)')
 
     # Настройка графика
-    plt.title(f'Сравнение времени T1 и T2 от k ({file_name})')
+    plt.title(f'Сравнение времени T1 и T2 и T3 от k ({file_name})')
     plt.xlabel('k')
     plt.ylabel('Время (s)')
     plt.grid()
